@@ -1,4 +1,3 @@
-#Mon Oct 27 01:32:55 CET 2003
 =
 attached_documents=
 author=Author
@@ -10,14 +9,12 @@ edit=Edit
 edit_topic=
 files=
 forum.topic_editor=
-iw.component.com.idega.block.forum.idegaForum.name=
 iw.component.com.idega.block.forum.presentation.Forum.name=Forum
-iw.component.se.idega.idegaweb.commune.block.forum.presentation.CommuneForum.name=
 last_updated=Last updated
 moderator=
 new_thread=New thread
 replies=Replies
-replies_lc=
+replies_lc=replies
 reply=Reply
 save=Spara
 thread=Thread
