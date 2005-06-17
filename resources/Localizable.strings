@@ -8,6 +8,7 @@ delete=Delete
 edit=Edit
 edit_topic=
 files=
+forum=Forum
 forum.topic_editor=
 iw.component.com.idega.block.forum.presentation.Forum.name=Forum
 last_updated=Last updated
