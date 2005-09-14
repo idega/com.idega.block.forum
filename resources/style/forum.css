@@ -1,0 +1,48 @@
+.forum {
+    border: 1px solid orange;
+    width: auto;
+}
+
+.forum .forum_table {
+	zzzborder: 1px solid red;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.forum .forum_table td, .forum .forum_table th {
+    zzborder: 1px solid navy;
+    margin: 0;   
+}
+
+.forum .forum_table th {
+	background-color: #eeeeee;
+    font-weight: normal;
+}
+
+.forum .forum_table tr.even_row {
+	background-color: #fafafa;    
+}
+
+
+.forum .forum_table .topics { 
+    text-align: left; 
+}
+
+.forum .forum_table .threads { 
+    text-align: center;  
+}
+
+.forum .forum_table .last_updated {
+    text-align: center;  
+}
+
+.forum .forum_table col.topics { 
+    width: 75%; 
+}
+.forum .forum_table col.threads { 
+    width: 10%;
+}
+.forum .forum_table col.last_updated { 
+    width: 15%; 
+}
+
