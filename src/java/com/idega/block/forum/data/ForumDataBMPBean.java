@@ -185,18 +185,18 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
   }
 
   public Collection ejbFindAllThreads(ICCategory category) throws FinderException {
-    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+this.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+this.getColumnNameParentThreadID()+" = -1 and "+this.getColumnNameValid()+" = 'Y' order by "+this.getColumnNameThreadDate()+" desc";
+    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+ForumDataBMPBean.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+ForumDataBMPBean.getColumnNameParentThreadID()+" = -1 and "+ForumDataBMPBean.getColumnNameValid()+" = 'Y' order by "+ForumDataBMPBean.getColumnNameThreadDate()+" desc";
     return super.idoFindIDsBySQL(sql);
   }
 
   public Collection ejbFindAllThreads(ICCategory category,int numberOfReturns) throws FinderException {
-    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+this.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+this.getColumnNameParentThreadID()+" = -1 and "+this.getColumnNameValid()+" = 'Y' order by "+this.getColumnNameThreadDate()+" desc";
+    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+ForumDataBMPBean.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+ForumDataBMPBean.getColumnNameParentThreadID()+" = -1 and "+ForumDataBMPBean.getColumnNameValid()+" = 'Y' order by "+ForumDataBMPBean.getColumnNameThreadDate()+" desc";
     return super.idoFindIDsBySQL(sql,numberOfReturns);
   }
 
   public int ejbHomeGetNumberOfThreads(ICCategory category) throws EJBException {
     try{
-      String sql = "select count("+getIDColumnName()+") from "+getEntityTableName()+" where "+this.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+this.getColumnNameParentThreadID()+" = -1 and "+this.getColumnNameValid()+" = 'Y'";
+      String sql = "select count("+getIDColumnName()+") from "+getEntityTableName()+" where "+ForumDataBMPBean.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+ForumDataBMPBean.getColumnNameParentThreadID()+" = -1 and "+ForumDataBMPBean.getColumnNameValid()+" = 'Y'";
       return super.idoGetNumberOfRecords(sql);
     }
     catch(com.idega.data.IDOException idoe){
@@ -205,7 +205,7 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
   }
 
   public Collection ejbFindNewestThread(ICCategory category) throws FinderException {
-    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+this.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+this.getColumnNameParentThreadID()+" = -1 and "+this.getColumnNameValid()+" = 'Y' order by "+this.getColumnNameThreadDate()+" desc";
+    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+ForumDataBMPBean.getColumnNameTopicID()+" = "+Integer.toString(category.getID())+" and "+ForumDataBMPBean.getColumnNameParentThreadID()+" = -1 and "+ForumDataBMPBean.getColumnNameValid()+" = 'Y' order by "+ForumDataBMPBean.getColumnNameThreadDate()+" desc";
     return super.idoFindIDsBySQL(sql,1);
   }
 
@@ -214,9 +214,9 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
     sql.append("select "+getIDColumnName()+" from ");
     sql.append(getEntityTableName());
     sql.append(" where ");
-    sql.append(this.getColumnNameParentThreadID());
+    sql.append(ForumDataBMPBean.getColumnNameParentThreadID());
     sql.append(" = -1 and ");
-    sql.append(this.getColumnNameValid());
+    sql.append(ForumDataBMPBean.getColumnNameValid());
     sql.append(" = 'Y' and (");
     Iterator iter = categories.iterator();
     while (iter.hasNext()) {
@@ -228,13 +228,13 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
 	sql.append(" or ");
     }
     sql.append(") order by ");
-    sql.append(this.getColumnNameThreadDate());
+    sql.append(ForumDataBMPBean.getColumnNameThreadDate());
     sql.append(" desc");
     return super.idoFindIDsBySQL(sql.toString(),numberOfReturns);
   }
   
   public Collection ejbFindAllTopLevelThreads() throws FinderException {
-    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+this.getColumnNameParentThreadID()+" = -1 and "+this.getColumnNameValid()+" = 'Y' order by "+this.getColumnNameThreadDate()+" desc";
+    String sql = "select "+getIDColumnName()+" from "+getEntityTableName()+" where "+ForumDataBMPBean.getColumnNameParentThreadID()+" = -1 and "+ForumDataBMPBean.getColumnNameValid()+" = 'Y' order by "+ForumDataBMPBean.getColumnNameThreadDate()+" desc";
     return super.idoFindIDsBySQL(sql);
   }
 

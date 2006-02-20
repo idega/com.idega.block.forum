@@ -117,7 +117,7 @@ public class ForumBusiness {
 					thread.setUserEMail(email);
 			}
 			thread.setValid(true);
-			thread.setThreadDate(new IWTimestamp().getTimestampRightNow());
+			thread.setThreadDate(IWTimestamp.getTimestampRightNow());
 
 			thread.store();
 
