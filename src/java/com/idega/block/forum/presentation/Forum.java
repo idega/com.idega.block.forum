@@ -18,7 +18,6 @@ import com.idega.block.forum.business.ForumTree;
 import com.idega.block.forum.data.ForumData;
 import com.idega.core.builder.data.ICPage;
 import com.idega.core.contact.data.Email;
-import com.idega.core.localisation.business.ICLocaleBusiness;
 import com.idega.core.user.business.UserBusiness;
 import com.idega.core.user.data.User;
 import com.idega.event.IWPresentationState;
@@ -52,11 +51,8 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	protected int _topicID = -1;
 	private int _threadID = -1;
 	private boolean _isAdmin = false;
-	private boolean _hasAddPermission = true;
 	private boolean _hasReplyPermission = true;
 	private boolean _hasDeletePermission = false;
-	private String _attribute;
-	private int _iLocaleID;
 	private int _bodyIndent = 2;
 	
 	protected int _firstThread = 1;
@@ -157,12 +153,10 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		_iwcb = iwc.getIWMainApplication().getBundle(IW_CORE_BUNDLE_IDENTIFIER);
 
 		_isAdmin = iwc.hasEditPermission(this);
-		_iLocaleID = ICLocaleBusiness.getLocaleId(iwc.getCurrentLocale());
 		_objectID = getICObjectInstanceID();
 
 		getParameters(iwc);
 		_hasDeletePermission = hasDeletePermission(iwc);
-		_hasAddPermission = hasAddPermission(iwc);
 		_hasReplyPermission = hasReplyPermission(iwc);
 
 		forumBusiness = new ForumBusiness();

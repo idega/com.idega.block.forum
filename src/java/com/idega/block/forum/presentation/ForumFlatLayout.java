@@ -23,9 +23,6 @@ public class ForumFlatLayout extends Forum {
 	private int initialBodyIndent = 10;
 	private int initialHeaderIndent = 10;
 	private int indent = 15;
-	private int _threadID = -1;
-	
-	
 	public void setDefaultValues() {
 		super.setDefaultValues();
 //		setToShowForumLinksOnTopOfThreadList(false);

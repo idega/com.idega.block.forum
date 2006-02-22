@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
 import com.idega.block.category.business.CategoryBusiness;
 import com.idega.block.category.business.CategoryFinder;
 import com.idega.block.category.data.ICCategory;
@@ -17,7 +18,6 @@ import com.idega.block.forum.business.ForumTree;
 import com.idega.block.forum.data.ForumData;
 import com.idega.core.builder.data.ICPage;
 import com.idega.core.contact.data.Email;
-import com.idega.core.localisation.business.ICLocaleBusiness;
 import com.idega.core.user.business.UserBusiness;
 import com.idega.core.user.data.User;
 import com.idega.event.IWPresentationState;
@@ -58,11 +58,8 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 	protected int _topicID = -1;
 	private int _threadID = -1;
 	private boolean _isAdmin = false;
-	private boolean _hasAddPermission = true;
 	private boolean _hasReplyPermission = true;
 	private boolean _hasDeletePermission = false;
-	private String _attribute;
-	private int _iLocaleID;
 	private int _bodyIndent = 2;
 	
 	protected int _firstThread = 1;
@@ -77,8 +74,6 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 	protected int _state = ForumBusiness.FORUM_TOPICS;
 	private int _initialState = ForumBusiness.FORUM_TOPICS;
 	private int _openLevel = 0;
-	private Table _myTable;
-
 	protected static final String HEADER_STYLE = "HeaderStyle";
 	protected static final String LINK_STYLE = "LinkStyle";
 	protected static final String TOPIC_LINK_STYLE = "TopicLinkStyle";
@@ -96,7 +91,6 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 	
 	protected String _headingColor = null;
 
-	private String _width;
 	private ICPage _page;
 	private ICPage _threadPage;
 	private Image _threadImage;
@@ -167,12 +161,10 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 		_iwcb = iwc.getIWMainApplication().getBundle(IW_CORE_BUNDLE_IDENTIFIER);
 
 		_isAdmin = iwc.hasEditPermission(this);
-		_iLocaleID = ICLocaleBusiness.getLocaleId(iwc.getCurrentLocale());
 		_objectID = getICObjectInstanceID();
 
 		getParameters(iwc);
 		_hasDeletePermission = hasDeletePermission(iwc);
-		_hasAddPermission = hasAddPermission(iwc);
 		_hasReplyPermission = hasReplyPermission(iwc);
 
 		forumBusiness = new ForumBusiness();
@@ -893,35 +885,7 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 		return table;
 	}
 
-	private Table getForumLinks() {
-		Table table = new Table();
-		table.setCellspacing(0);
-		table.setCellpadding(2);
-		int column = 1;
-
-		if (_topicID != -1) {
-			ThreadNewLink newLink = new ThreadNewLink();
-			newLink.setImagePadding(2);
-			newLink.setImageAlignment(Image.ALIGNMENT_ABSOLUTE_MIDDLE);
-			table.add(newLink, column++, 1);
-		}
-
-		if (_showOverviewLink) {
-			TopicOverviewLink overview = new TopicOverviewLink();
-			overview.setImagePadding(2);
-			overview.setImageAlignment(Image.ALIGNMENT_ABSOLUTE_MIDDLE);
-			if (_page != null) {
-				overview.setPage(_page);
-			}
-			
-			table.add(overview, column, 1);
-		}
-
-		return table;
-	}
-
-    
-    private Layer getForumLinks2(){
+	private Layer getForumLinks2(){
         Layer layer = createLayerWithStyleClass("forum_links");
         
         if (_topicID != -1) {
@@ -1017,8 +981,6 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 	}
 
 	public void setDefaultValues() {
-		_width = Table.HUNDRED_PERCENT;
-		// _headingColor = "#eeeeee"; //XXX remove altogether                
 	}
 	
 	public Map getStyleNames() {
@@ -1050,7 +1012,6 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 	}
 
 	public void setWidth(String width) {
-		_width = width;
 	}
 
 	public void setPage(ICPage page) {
