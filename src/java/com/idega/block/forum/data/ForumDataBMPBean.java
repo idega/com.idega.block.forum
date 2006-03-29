@@ -10,7 +10,6 @@ import javax.ejb.FinderException;
 
 import com.idega.block.category.data.ICCategory;
 import com.idega.core.user.data.User;
-import com.idega.core.user.data.UserBMPBean;
 import com.idega.data.TreeableEntityBMPBean;
 
 /**
@@ -56,7 +55,7 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
   public static String getColumnNameTopicID() { return "IC_CATEGORY_ID"; }
   public static String getColumnNameThreadSubject() { return "THREAD_SUBJECT"; }
   public static String getColumnNameThreadBody() { return "THREAD_BODY"; }
-  public static String getColumnNameUserID() { return UserBMPBean.getColumnNameUserID(); }
+  public static String getColumnNameUserID() { return com.idega.user.data.UserBMPBean.getColumnNameUserID(); }
   public static String getColumnNameUserName() { return "USER_NAME"; }
   public static String getColumnNameUserEMail() { return "USER_EMAIL"; }
   public static String getColumnNameThreadDate() { return "THREAD_DATE"; }
