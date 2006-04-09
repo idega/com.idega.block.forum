@@ -119,10 +119,12 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
   }
 
   public boolean isValid(){
-    if (((String)getColumnValue(getColumnNameValid())).equals("Y") )
-      return true;
-    else
-      return false;
+    if (((String)getColumnValue(getColumnNameValid())).equals("Y") ) {
+			return true;
+		}
+		else {
+			return false;
+		}
   }
 
 
@@ -172,10 +174,12 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
   }
 
   public void setValid(boolean valid){
-    if (valid)
-      setColumn(getColumnNameValid(),"Y");
-    else
-      setColumn(getColumnNameValid(),"N");
+    if (valid) {
+			setColumn(getColumnNameValid(),"Y");
+		}
+		else {
+			setColumn(getColumnNameValid(),"N");
+		}
   }
 
   public Iterator getChildrenIterator(){
@@ -223,8 +227,9 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
       sql.append(getColumnNameTopicID());
       sql.append(" = ");
       sql.append(String.valueOf(item.getID()));
-      if ( iter.hasNext() )
-	sql.append(" or ");
+      if ( iter.hasNext() ) {
+				sql.append(" or ");
+			}
     }
     sql.append(") order by ");
     sql.append(ForumDataBMPBean.getColumnNameThreadDate());
