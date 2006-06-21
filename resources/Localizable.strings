@@ -12,6 +12,7 @@ forum=Forum
 forum.topic_editor=
 iw.component.com.idega.block.forum.presentation.Forum.name=Forum
 iw.component.com.idega.block.forum.presentation.Forum2.name=Forum2
+iw.component.com.idega.block.forum.presentation.ForumFlatLayout.name=ForumFlatLayout
 last_updated=Last updated
 moderator=
 new_thread=New thread
