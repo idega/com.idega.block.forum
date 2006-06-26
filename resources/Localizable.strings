@@ -1,6 +1,8 @@
 =
 attached_documents=
 author=Author
+body_is_empty=Threads body is empty
+cannot_save=Cannot save
 close=St\u00E4ng
 closes_on_date=
 date=Date
@@ -16,6 +18,8 @@ iw.component.com.idega.block.forum.presentation.ForumFlatLayout.name=ForumFlatLa
 last_updated=Last updated
 moderator=
 new_thread=New thread
+next_threads=Next
+previous_threads=Previous
 replies=Replies
 replies_lc=replies
 reply=Reply
