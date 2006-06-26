@@ -6,7 +6,6 @@
   <name>idegaWeb Forum Block</name>
   <artifactId>com.idega.block.forum</artifactId>
   <currentVersion>3.1.0</currentVersion>
-
   <versions>
     <version>
       <id>1.0</id>
@@ -17,6 +16,11 @@
       <id>1.0.1</id>
       <name>1.0.1</name>
       <tag>FORUM_1_0_1</tag>
+    </version>
+    <version>
+      <id>3.1.0</id>
+      <name>3.1.0</name>
+      <tag>FORUM_3_1_0</tag>
     </version>
   </versions>
   <branches/>
@@ -58,7 +62,7 @@
       <type>jar</type>
       <url>http://www.idega.com/</url>
       <properties>
-          <eclipse.dependency>${idegaweb.project.source.dependent}</eclipse.dependency>
+        <eclipse.dependency>${idegaweb.project.source.dependent}</eclipse.dependency>
       </properties>
     </dependency>
     <dependency>
@@ -68,7 +72,7 @@
       <type>jar</type>
       <url>http://www.idega.com/</url>
       <properties>
-          <eclipse.dependency>${idegaweb.project.source.dependent}</eclipse.dependency>
+        <eclipse.dependency>${idegaweb.project.source.dependent}</eclipse.dependency>
       </properties>
     </dependency>
   </dependencies>
