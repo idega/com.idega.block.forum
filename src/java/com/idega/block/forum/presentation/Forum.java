@@ -18,6 +18,7 @@ import com.idega.block.forum.business.ForumTree;
 import com.idega.block.forum.data.ForumData;
 import com.idega.core.builder.data.ICPage;
 import com.idega.core.contact.data.Email;
+import com.idega.core.localisation.business.ICLocaleBusiness;
 import com.idega.core.user.business.UserBusiness;
 import com.idega.core.user.data.User;
 import com.idega.event.IWPresentationState;
@@ -51,8 +52,11 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	protected int _topicID = -1;
 	private int _threadID = -1;
 	private boolean _isAdmin = false;
+	private boolean _hasAddPermission = true;
 	private boolean _hasReplyPermission = true;
 	private boolean _hasDeletePermission = false;
+	private String _attribute;
+	private int _iLocaleID;
 	private int _bodyIndent = 2;
 	
 	protected int _firstThread = 1;
@@ -153,10 +157,12 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		this._iwcb = iwc.getIWMainApplication().getBundle(IW_CORE_BUNDLE_IDENTIFIER);
 
 		this._isAdmin = iwc.hasEditPermission(this);
+		this._iLocaleID = ICLocaleBusiness.getLocaleId(iwc.getCurrentLocale());
 		this._objectID = getICObjectInstanceID();
 
 		getParameters(iwc);
 		this._hasDeletePermission = hasDeletePermission(iwc);
+		this._hasAddPermission = hasAddPermission(iwc);
 		this._hasReplyPermission = hasReplyPermission(iwc);
 
 		this.forumBusiness = new ForumBusiness();
@@ -336,7 +342,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	}
 
 	protected int displaySelectedForum(IWContext iwc, Table table, int row, ForumData thread, int depth) {
-		//hér á að kalla á minni föll í stað getThreadHeaderTable - henni verður eytt
+		//hï¿½r ï¿½ aï¿½ kalla ï¿½ minni fï¿½ll ï¿½ staï¿½ getThreadHeaderTable - henni verï¿½ur eytt
 		table.add(getThreadHeaderTable(thread, iwc), 1, row++);
 		table.setHeight(row++, 3);
 		//table.setBackgroundImage(1, row++, _iwb.getImage("shared/dotted.gif"));

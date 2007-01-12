@@ -10,13 +10,14 @@ import javax.ejb.FinderException;
 
 import com.idega.block.category.data.ICCategory;
 import com.idega.core.user.data.User;
+import com.idega.core.user.data.UserBMPBean;
 import com.idega.data.TreeableEntityBMPBean;
 
 /**
  * Title:        Forums<p>
  * Description:  <p>
- * Copyright:    Copyright (c) idega margmiðlun hf.<p>
- * Company:      idega margmiðlun hf.<p>
+ * Copyright:    Copyright (c) idega margmiï¿½lun hf.<p>
+ * Company:      idega margmiï¿½lun hf.<p>
  * @author idega 2001 - idega team - <a href="mailto:laddi@idega.is">laddi@idega.is</a>
  * @version 2.0
  */
@@ -120,11 +121,11 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
 
   public boolean isValid(){
     if (((String)getColumnValue(getColumnNameValid())).equals("Y") ) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return true;
+	}
+	else {
+		return false;
+	}
   }
 
 
@@ -175,11 +176,11 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
 
   public void setValid(boolean valid){
     if (valid) {
-			setColumn(getColumnNameValid(),"Y");
-		}
-		else {
-			setColumn(getColumnNameValid(),"N");
-		}
+		setColumn(getColumnNameValid(),"Y");
+	}
+	else {
+		setColumn(getColumnNameValid(),"N");
+	}
   }
 
   public Iterator getChildrenIterator(){
@@ -228,8 +229,8 @@ public class ForumDataBMPBean extends TreeableEntityBMPBean implements ForumData
       sql.append(" = ");
       sql.append(String.valueOf(item.getID()));
       if ( iter.hasNext() ) {
-				sql.append(" or ");
-			}
+		sql.append(" or ");
+	}
     }
     sql.append(") order by ");
     sql.append(ForumDataBMPBean.getColumnNameThreadDate());

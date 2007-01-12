@@ -30,6 +30,9 @@ public abstract class ForumLink extends Block {
 	private boolean iHasAddPermission = false;
 	private boolean iHasReplyPermission = false;
 	
+	private Boolean hasViewPermission = null;
+	
+
 	public void main(IWContext iwc) throws Exception {
 		this.iwrb = getResourceBundle(iwc);
 		this.iwb = getBundle(iwc);

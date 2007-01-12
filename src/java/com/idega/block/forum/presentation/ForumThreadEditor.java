@@ -3,8 +3,11 @@ package com.idega.block.forum.presentation;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.idega.idegaweb.block.presentation.Builderaware;
 import com.idega.block.forum.business.ForumBusiness;
 import com.idega.block.forum.data.ForumData;
+import com.idega.core.localisation.business.ICLocaleBusiness;
+import com.idega.idegaweb.IWBundle;
 import com.idega.idegaweb.IWResourceBundle;
 import com.idega.idegaweb.presentation.IWAdminWindow;
 import com.idega.presentation.IWContext;
@@ -18,16 +21,20 @@ public class ForumThreadEditor extends IWAdminWindow {
 
 	private final static String IW_BUNDLE_IDENTIFIER = "com.idega.block.forum";
 	private boolean _isAdmin = false;
+	private boolean _save = false;
 	private boolean _update = false;
+	private int _forumID = -1;
 	private int _topicID = -1;
 	private int _parentThreadID = -1;
 	private int _threadID = -1;
+	private int _localeID = -1;
 	private int _userID = -1;
 	private boolean _isLoggedOn = false;
 	
 	private String someErrorMessage = null;
 	private String errorDetail = null;
 
+	private IWBundle _iwb;
 	private IWResourceBundle _iwrb;
 	private ForumBusiness forumBusiness;
 
@@ -44,7 +51,9 @@ public class ForumThreadEditor extends IWAdminWindow {
 		 * @todo permission
 		 */
 		this._isAdmin = true; //AccessControl.hasEditPermission(this,iwc);
+		this._iwb = iwc.getIWMainApplication().getBundle(Builderaware.IW_CORE_BUNDLE_IDENTIFIER);
 		this._iwrb = getResourceBundle(iwc);
+		this._localeID = ICLocaleBusiness.getLocaleId(iwc.getCurrentLocale());
 		this._isLoggedOn = iwc.isLoggedOn();
 		if (this._isLoggedOn) {
 			this._userID = iwc.getUserId();
