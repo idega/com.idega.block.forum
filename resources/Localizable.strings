@@ -12,6 +12,7 @@ edit_topic=
 files=
 forum=Forum
 forum.topic_editor=
+headline_is_empty=Threads headline is empty
 iw.component.com.idega.block.forum.presentation.Forum.name=Forum
 iw.component.com.idega.block.forum.presentation.Forum2.name=Forum2
 iw.component.com.idega.block.forum.presentation.ForumFlatLayout.name=ForumFlatLayout
