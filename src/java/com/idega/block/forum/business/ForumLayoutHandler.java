@@ -1,5 +1,5 @@
 /*
- * $Id: ForumLayoutHandler.java,v 1.4 2004/06/28 14:07:44 thomas Exp $
+ * $Id: ForumLayoutHandler.java,v 1.5 2007/10/25 18:33:28 valdas Exp $
  *
  * Copyright (C) 2001 Idega hf. All Rights Reserved.
  *
@@ -37,7 +37,7 @@ public class ForumLayoutHandler implements ICPropertyHandler {
   /**
    *
    */
-  public PresentationObject getHandlerObject(String name, String value, IWContext iwc) {
+  public PresentationObject getHandlerObject(String name, String value, IWContext iwc, boolean oldGenerationHandler, String instanceId, String method) {
     DropdownMenu menu = new DropdownMenu(name);
     menu.addMenuElement("","Select:");
     menu.addMenuElement(ForumBusiness.FORUM_TOPICS,"Topics view");
