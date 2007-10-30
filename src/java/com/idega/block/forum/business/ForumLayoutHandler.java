@@ -1,5 +1,5 @@
 /*
- * $Id: ForumLayoutHandler.java,v 1.5 2007/10/25 18:33:28 valdas Exp $
+ * $Id: ForumLayoutHandler.java,v 1.6 2007/10/30 10:24:36 gimmi Exp $
  *
  * Copyright (C) 2001 Idega hf. All Rights Reserved.
  *
@@ -52,4 +52,8 @@ public class ForumLayoutHandler implements ICPropertyHandler {
    */
   public void onUpdate(String values[], IWContext iwc) {
   }
+
+	public PresentationObject getHandlerObject(String name, String stringValue, IWContext iwc) {
+		return getHandlerObject(name, stringValue, iwc, false, null, null);
+	}
 }
