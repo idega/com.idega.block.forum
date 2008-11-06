@@ -16,6 +16,7 @@ import com.idega.presentation.Image;
 import com.idega.presentation.Table;
 import com.idega.presentation.text.Link;
 import com.idega.presentation.text.Text;
+import com.idega.util.PresentationUtil;
 
 /**
  * @author Laddi
@@ -32,9 +33,11 @@ public class ForumNavigation extends Block {
 	
 	private ICPage _page;
 	
+	@Override
 	public void main(IWContext iwc) {
 		this._iwrb = getResourceBundle(iwc);
 		this._iwb = getBundle(iwc);
+		PresentationUtil.addStyleSheetToHeader(iwc, _iwb.getVirtualPathWithFileNameString("style/forum.css"));
 
 		this._hasAddPermission = hasAddPermission(iwc);
 
@@ -110,10 +113,12 @@ public class ForumNavigation extends Block {
 		return overView;
 	}
 	
+	@Override
 	public String getBundleIdentifier() {
 		return Forum.IW_BUNDLE_IDENTIFIER;
 	}
 
+	@Override
 	public void registerPermissionKeys() {
 		registerPermissionKey(Forum.AddPermission);
 	}

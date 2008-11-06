@@ -41,6 +41,7 @@ import com.idega.presentation.text.Link;
 import com.idega.presentation.text.Paragraph;
 import com.idega.presentation.text.Text;
 import com.idega.util.IWTimestamp;
+import com.idega.util.PresentationUtil;
 import com.idega.util.text.TextSoap;
 
 /**
@@ -159,6 +160,7 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 		this._iwrb = getResourceBundle(iwc);
 		this._iwb = getBundle(iwc);
 		this._iwcb = iwc.getIWMainApplication().getBundle(IW_CORE_BUNDLE_IDENTIFIER);
+		PresentationUtil.addStyleSheetToHeader(iwc, _iwb.getVirtualPathWithFileNameString("style/forum.css"));
 
 		this._isAdmin = iwc.hasEditPermission(this);
 		this._objectID = getICObjectInstanceID();

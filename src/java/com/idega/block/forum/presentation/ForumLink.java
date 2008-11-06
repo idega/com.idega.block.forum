@@ -14,6 +14,7 @@ import com.idega.presentation.Block;
 import com.idega.presentation.IWContext;
 import com.idega.presentation.Image;
 import com.idega.presentation.PresentationObject;
+import com.idega.util.PresentationUtil;
 
 /**
  * @author Anna
@@ -30,11 +31,13 @@ public abstract class ForumLink extends Block {
 	private boolean iHasAddPermission = false;
 	private boolean iHasReplyPermission = false;
 	
+	@Override
 	public void main(IWContext iwc) throws Exception {
 		this.iwrb = getResourceBundle(iwc);
 		this.iwb = getBundle(iwc);
 		this.iHasAddPermission = hasAddPermission(iwc);
 		this.iHasReplyPermission = hasReplyPermission(iwc);
+		PresentationUtil.addStyleSheetToHeader(iwc, iwb.getVirtualPathWithFileNameString("style/forum.css"));
 
 		int topicID = -1;
 		try {
@@ -87,10 +90,12 @@ public abstract class ForumLink extends Block {
 		return this.iHasAddPermission;
 	}
 	
+	@Override
 	public String getBundleIdentifier() {
 		return Forum.IW_BUNDLE_IDENTIFIER;
 	}
 
+	@Override
 	public void registerPermissionKeys() {
 		registerPermissionKey(Forum.AddPermission);
 	}
