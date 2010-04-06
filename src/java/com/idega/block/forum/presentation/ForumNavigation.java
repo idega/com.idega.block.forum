@@ -33,7 +33,6 @@ public class ForumNavigation extends Block {
 	
 	private ICPage _page;
 	
-	@Override
 	public void main(IWContext iwc) {
 		this._iwrb = getResourceBundle(iwc);
 		this._iwb = getBundle(iwc);
@@ -113,12 +112,10 @@ public class ForumNavigation extends Block {
 		return overView;
 	}
 	
-	@Override
 	public String getBundleIdentifier() {
 		return Forum.IW_BUNDLE_IDENTIFIER;
 	}
 
-	@Override
 	public void registerPermissionKeys() {
 		registerPermissionKey(Forum.AddPermission);
 	}

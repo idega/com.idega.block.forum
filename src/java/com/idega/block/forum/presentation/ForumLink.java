@@ -31,7 +31,6 @@ public abstract class ForumLink extends Block {
 	private boolean iHasAddPermission = false;
 	private boolean iHasReplyPermission = false;
 	
-	@Override
 	public void main(IWContext iwc) throws Exception {
 		this.iwrb = getResourceBundle(iwc);
 		this.iwb = getBundle(iwc);
@@ -90,12 +89,10 @@ public abstract class ForumLink extends Block {
 		return this.iHasAddPermission;
 	}
 	
-	@Override
 	public String getBundleIdentifier() {
 		return Forum.IW_BUNDLE_IDENTIFIER;
 	}
 
-	@Override
 	public void registerPermissionKeys() {
 		registerPermissionKey(Forum.AddPermission);
 	}
