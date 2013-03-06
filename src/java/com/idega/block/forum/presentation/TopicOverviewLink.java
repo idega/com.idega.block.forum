@@ -28,11 +28,11 @@ public class TopicOverviewLink extends TopicLink {
 	public Image getLinkImage(IWBundle bundle) {
 		return bundle.getImage("shared/forum.gif");
 	}
-	//efast um að þetta þurfi
+	//efast um aÃ° Ã¾etta Ã¾urfi
 	public Class getWindowClassToOpen() {
 		return null;
 	}
-	//skil ekki að þetta þurfi heldur
+	//skil ekki aÃ° Ã¾etta Ã¾urfi heldur
 	public boolean addTopicIDToLink() {
 		return false;
 	}
