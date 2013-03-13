@@ -338,7 +338,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	}
 
 	protected int displaySelectedForum(IWContext iwc, Table table, int row, ForumData thread, int depth) {
-		//hér á ağ kalla á minni föll í stağ getThreadHeaderTable - henni verğur eytt
+		//hÃ©r Ã¡ aÃ° kalla Ã¡ minni fÃ¶ll Ã­ staÃ° getThreadHeaderTable - henni verÃ°ur eytt
 		table.add(getThreadHeaderTable(thread, iwc), 1, row++);
 		table.setHeight(row++, 3);
 		//table.setBackgroundImage(1, row++, _iwb.getImage("shared/dotted.gif"));
