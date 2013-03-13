@@ -15,8 +15,8 @@ import com.idega.data.TreeableEntityBMPBean;
 /**
  * Title:        Forums<p>
  * Description:  <p>
- * Copyright:    Copyright (c) idega margmiðlun hf.<p>
- * Company:      idega margmiðlun hf.<p>
+ * Copyright:    Copyright (c) idega margmiÃ°lun hf.<p>
+ * Company:      idega margmiÃ°lun hf.<p>
  * @author idega 2001 - idega team - <a href="mailto:laddi@idega.is">laddi@idega.is</a>
  * @version 2.0
  */
