@@ -708,11 +708,8 @@ public class Forum2 extends CategoryBlock implements Builderaware, StatefullPres
 
 	protected PresentationObject getForumTree(IWContext iwc, ForumData[] threads) {
 		ForumTree tree = new ForumTree();
-		/**
-		 * @todo chage later: legacy-fix
-		 */
+
 		tree.setICObjectInstanceID(this.getICObjectInstanceID());
-		System.out.println("Forum: tree.setICObjectInstanceID(" + this.getICObjectInstanceID() + ");");
 
 		tree.setHeadingColor(this._headingColor);
 		tree.setExtraHeadingColor(1, this._headingColor);
