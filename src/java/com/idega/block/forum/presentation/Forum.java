@@ -55,7 +55,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	private boolean _hasReplyPermission = true;
 	private boolean _hasDeletePermission = false;
 	private int _bodyIndent = 2;
-	
+
 	protected int _firstThread = 1;
 	protected int _lastThread = 10;
 	private int _numberOfThreads = 10;
@@ -84,7 +84,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	protected static final String DARK_ROW_STYLE = "DarkRowStyle";
 	protected static final String HEADER_ROW_STYLE = "HeaderRowStyle";
 	protected static final String BODY_ROW_STYLE = "BodyRowStyle";
-	
+
 	protected String _headingColor;
 
 	private String _width;
@@ -96,13 +96,13 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 
 	protected static String AddPermission = "add";
 	protected static String ReplyPermission = "reply";
-	
+
 	protected final static String IW_BUNDLE_IDENTIFIER = "com.idega.block.forum";
 	protected IWResourceBundle _iwrb;
 	protected IWBundle _iwb;
 	protected IWBundle _iwcb;
 	protected ForumBusiness forumBusiness;
-	
+
 	private boolean ignoreObjectID = false;
 
 	/**
@@ -115,10 +115,10 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	private String _dateWidth = "100";
 	private String iThreadTopicWidth = "100";
 	private String iUpdatedTopicWidth = "100";
-	
+
 	private boolean iShowForumLinks = true;
 	private boolean userCanEditHisOwnThreads = false;
-	private boolean showForumLinksOnTopOfThreadList = true;	
+	private boolean showForumLinksOnTopOfThreadList = true;
 
 	public Forum() {
 		setDefaultValues();
@@ -128,10 +128,12 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	 * Temporary implementation
 	 * returning stateClass for the ForumTree Object
 	 */
+	@Override
 	public Class getPresentationStateClass() {
 		return this.stateHandler.getPresentationStateClass();
 	}
 
+	@Override
 	public IWPresentationState getPresentationState(IWUserContext iwuc) {
 		return this.stateHandler.getPresentationState(this, iwuc);
 	}
@@ -139,15 +141,16 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	public boolean hasDeletePermission(IWContext iwc) {
 		return iwc.hasEditPermission(this);
 	}
-	
+
 	public boolean hasAddPermission(IWContext iwc) {
 		return iwc.hasPermission(AddPermission, this);
 	}
-	
+
 	public boolean hasReplyPermission(IWContext iwc) {
 		return iwc.hasPermission(ReplyPermission, this);
 	}
-	
+
+	@Override
 	public void main(IWContext iwc) throws Exception {
 		this._iwrb = getResourceBundle(iwc);
 		this._iwb = getBundle(iwc);
@@ -265,7 +268,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 					if (lastUpdatedText != null) {
 						table.add(lastUpdatedText, 3, row);
 					}
-					
+
 					if (row % 2 == 0) {
 						table.setRowStyleClass(row, getStyleName(LIGHT_ROW_STYLE));
 					}
@@ -310,13 +313,13 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 				table.add(topicText, 1, row++);
 				//table.setBackgroundImage(1, row++, _iwb.getImage("shared/dotted.gif"));
 			}
-			
+
 			row = addBelowTopic(iwc, topic, table, row);
 
 			if (thread != null && thread.isValid()) {
 				row = displaySelectedForum(iwc, table, row, thread, 0);
 			}
-			
+
 			table.setHeight(1, row++, "20");
 			if(doShowForumLinksOnTopOfThreadList()){
 				table.add(getForumLinks(), 1, row++);
@@ -511,7 +514,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		IWTimestamp stamp = new IWTimestamp(thread.getThreadDate());
 		return getFormattedDate(stamp, iwc, style);
 	}
-	
+
 	protected Text getFormattedDate(IWTimestamp stamp, IWContext iwc, String style) {
 		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, iwc.getCurrentLocale());
 		Date date = new Date(stamp.getTimestamp().getTime());
@@ -520,11 +523,8 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 
 	protected PresentationObject getForumTree(IWContext iwc, ForumData[] threads) {
 		ForumTree tree = new ForumTree();
-		/**
-		 * @todo chage later: legacy-fix
-		 */
+
 		tree.setICObjectInstanceID(this.getICObjectInstanceID());
-		System.out.println("Forum: tree.setICObjectInstanceID(" + this.getICObjectInstanceID() + ");");
 
 		tree.setHeadingColor(this._headingColor);
 		tree.setExtraHeadingColor(1, this._headingColor);
@@ -573,7 +573,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 
 		return table;
 	}
-	
+
 	protected Text getThreadSubject(ForumData thread) {
 		String headlineString = thread.getThreadSubject();
 		if (headlineString == null) {
@@ -593,7 +593,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 
 		return body;
 	}
-	
+
 	protected Image getThreadImage() {
 		Image image;
 		if (this._threadImage == null) {
@@ -613,7 +613,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		table.setCellspacing(0);
 		table.setWidth(Table.HUNDRED_PERCENT);
 		table.setAlignment(2, 1, Table.HORIZONTAL_ALIGN_RIGHT);
-		
+
 		if (hasPrevious) {
 			Image image = null;
 			if (this.iPreviousImage != null) {
@@ -623,7 +623,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 				image = this._iwb.getImage("shared/previous.gif", "Previous");
 			}
 			image.setAlignment(Image.ALIGNMENT_ABSOLUTE_MIDDLE);
-			
+
 			Link previous = new Link(image);
 			previous.addParameter(ForumBusiness.PARAMETER_TOPIC_ID, this._topicID);
 			previous.addParameter(ForumBusiness.PARAMETER_STATE, ForumBusiness.FORUM_THREADS);
@@ -654,7 +654,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 				image = this._iwb.getImage("shared/next.gif", "Next");
 			}
 			image.setAlignment(Image.ALIGNMENT_ABSOLUTE_MIDDLE);
-			
+
 			Link next = new Link(image);
 			next.addParameter(ForumBusiness.PARAMETER_TOPIC_ID, this._topicID);
 			next.addParameter(ForumBusiness.PARAMETER_STATE, ForumBusiness.FORUM_THREADS);
@@ -671,7 +671,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 			nextLink.addParameter(ForumBusiness.PARAMETER_THREAD_ID, this._threadID);
 			nextLink.addParameter(ForumBusiness.PARAMETER_OBJECT_INSTANCE_ID, this._objectID);
 			nextLink.setStyleClass(getStyleName(LINK_STYLE));
-			
+
 			table.add(nextLink, 2, 1);
 			table.add(Text.getNonBrakingSpace(), 2, 1);
 			table.add(next, 2, 1);
@@ -679,7 +679,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 
 		return table;
 	}
-	
+
 	//changed from private to protected because of ForumFlatLayout - ac
 	protected Table getThreadLinks(IWContext iwc, ForumData thread) {
 		Table table = new Table();
@@ -734,7 +734,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 			if (this._page != null) {
 				overview.setPage(this._page);
 			}
-			
+
 			table.add(overview, column, 1);
 		}
 
@@ -796,7 +796,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 			catch (NumberFormatException e) {
 			}
 		}
-		
+
 		try {
 			this._topicID = Integer.parseInt(iwc.getParameter(ForumBusiness.PARAMETER_TOPIC_ID));
 		}
@@ -822,7 +822,8 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		this._width = Table.HUNDRED_PERCENT;
 		this._headingColor = "#eeeeee";
 	}
-	
+
+	@Override
 	public Map getStyleNames() {
 		Map map = new HashMap();
 		map.put(HEADER_STYLE, "font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold");
@@ -838,12 +839,12 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		map.put(TOPIC_LINK_STYLE+":hover", "font-family: Arial, Helvetica,sans-serif; font-size: 11px; color: #000000; text-decoration: underline; font-weight:bold;");
 		map.put(THREAD_LINK_STYLE, "font-family: Arial, Helvetica,sans-serif; font-size: 11px; color: #000000; text-decoration: underline;");
 		map.put(THREAD_LINK_STYLE+":hover", "font-family: Arial, Helvetica,sans-serif; font-size: 11px; color: #000000; text-decoration: underline;");
-		
+
 		map.put(LIGHT_ROW_STYLE, "background-color:#FFFFFF;padding:2px;border-bottom:1px solid #000000");
 		map.put(DARK_ROW_STYLE, "background-color:#CDCDCD;padding:2px;border-bottom:1px solid #000000");
 		map.put(HEADER_ROW_STYLE, "background-color:#DFDFDF;padding:2px;");
 		map.put(BODY_ROW_STYLE, "background-color:#FFFFFF;padding:2px;");
-		
+
 		return map;
 	}
 
@@ -851,6 +852,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		this._numberOfThreads = numberOfThreads;
 	}
 
+	@Override
 	public void setWidth(String width) {
 		this._width = width;
 	}
@@ -913,23 +915,28 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		this._headingColor = color;
 	}
 
+	@Override
 	public boolean deleteBlock(int ICObjectInstanceID) {
 		return CategoryBusiness.getInstance().disconnectBlock(ICObjectInstanceID);
 	}
 
+	@Override
 	public String getBundleIdentifier() {
 		return IW_BUNDLE_IDENTIFIER;
 	}
 
+	@Override
 	public String getCategoryType() {
 		return "forum";
 	}
 
+	@Override
 	public void registerPermissionKeys() {
 		registerPermissionKey(AddPermission);
 		registerPermissionKey(ReplyPermission);
 	}
 
+	@Override
 	public boolean getMultible() {
 		return true;
 	}
@@ -986,6 +993,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		return this._topicID;
 	}
 
+	@Override
 	public Object clone() {
 		Forum obj = null;
 		try {
@@ -997,29 +1005,29 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 		}
 		return obj;
 	}
-	
+
 	/**
 	 * @param indent The _bodyIndent to set.
 	 */
 	public void setBodyIndent(int indent) {
 		this._bodyIndent = indent;
 	}
-	
+
 	/**
 	 * @param ignoreObjectID The ignoreObjectID to set.
 	 */
 	public void setIgnoreObjectID(boolean ignoreObjectID) {
 		this.ignoreObjectID = ignoreObjectID;
 	}
-	
+
 	protected String getAuthorWidth() {
 		return this._authorWidth;
 	}
-	
+
 	protected String getDateWidth() {
 		return this._dateWidth;
 	}
-	
+
 	protected String getReplyWidth() {
 		return this._replyWidth;
 	}
@@ -1050,7 +1058,7 @@ public class Forum extends CategoryBlock implements Builderaware, StatefullPrese
 	public void setShowForumLinks(boolean showForumLinks) {
 		this.iShowForumLinks = showForumLinks;
 	}
-	
+
 	public void setShowTopicInCollection(boolean showTopicInCollection) {
 		this.iShowTopicInCollection = showTopicInCollection;
 	}
