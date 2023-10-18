@@ -13,6 +13,8 @@ import com.idega.presentation.ui.HiddenInput;
 import com.idega.presentation.ui.SubmitButton;
 import com.idega.presentation.ui.TextArea;
 import com.idega.presentation.ui.TextInput;
+import com.idega.util.PresentationUtil;
+import com.idega.util.StringUtil;
 
 public class ForumThreadEditor extends IWAdminWindow {
 
@@ -24,7 +26,7 @@ public class ForumThreadEditor extends IWAdminWindow {
 	private int _threadID = -1;
 	private int _userID = -1;
 	private boolean _isLoggedOn = false;
-	
+
 	private String someErrorMessage = null;
 	private String errorDetail = null;
 
@@ -39,11 +41,14 @@ public class ForumThreadEditor extends IWAdminWindow {
 		setScrollbar(true);
 	}
 
+	@Override
 	public void main(IWContext iwc) throws Exception {
-		/**
-		 * @todo permission
-		 */
-		this._isAdmin = true; //AccessControl.hasEditPermission(this,iwc);
+		String style = iwc.getIWMainApplication().getSettings().getProperty("forum_global_style");
+		if (!StringUtil.isEmpty(style)) {
+			PresentationUtil.addStyleSheetToHeader(iwc, style);
+		}
+
+		this._isAdmin = true;
 		this._iwrb = getResourceBundle(iwc);
 		this._isLoggedOn = iwc.isLoggedOn();
 		if (this._isLoggedOn) {
@@ -110,7 +115,7 @@ public class ForumThreadEditor extends IWAdminWindow {
 				this._update = true;
 			}
 		}
-		
+
 		if (this._update && this._parentThreadID == -1) {
 			this._parentThreadID = this._threadID;
 			this._threadID = -1;
@@ -133,17 +138,17 @@ public class ForumThreadEditor extends IWAdminWindow {
 		if (this._parentThreadID != -1) {
 			parentThread = this.forumBusiness.getForumData(this._parentThreadID);
 		}
-		
+
 		if(this.someErrorMessage!=null){
 			addRight(this.someErrorMessage);
 			if(this.errorDetail!=null){
 				addRight(this.errorDetail);
 			}
 		}
-		
+
 
 		TextInput subject = new TextInput(ForumBusiness.PARAMETER_THREAD_HEADLINE);
-		subject.setLength(24);
+		subject.setLength(50);
 		if (this._update && thread.getThreadSubject() != null) {
 			subject.setContent(thread.getThreadSubject());
 		}
@@ -161,8 +166,9 @@ public class ForumThreadEditor extends IWAdminWindow {
 			body.setContent(thread.getThreadBody());
 		}
 		if (this._isLoggedOn) {
-			body.setHeight(10);
+			body.setHeight(5);
 		}
+		body.setColumns(73);
 		body.setWidth(Table.HUNDRED_PERCENT);
 
 		addLeft(this._iwrb.getLocalizedString("thread_subject", "Title") + ":", subject, true);
@@ -187,8 +193,8 @@ public class ForumThreadEditor extends IWAdminWindow {
 		addHiddenInput(new HiddenInput(ForumBusiness.PARAMETER_PARENT_THREAD_ID, Integer.toString(this._parentThreadID)));
 		addHiddenInput(new HiddenInput(ForumBusiness.PARAMETER_THREAD_ID, Integer.toString(this._threadID)));
 
-		addSubmitButton(new SubmitButton(this._iwrb.getLocalizedImageButton("close", "CLOSE"), ForumBusiness.PARAMETER_MODE, ForumBusiness.PARAMETER_CLOSE));
-		addSubmitButton(new SubmitButton(this._iwrb.getLocalizedImageButton("save", "SAVE"), ForumBusiness.PARAMETER_MODE, ForumBusiness.PARAMETER_SAVE));
+		addSubmitButton(new SubmitButton(this._iwrb.getLocalizedString(ForumBusiness.PARAMETER_CLOSE, "Close"), ForumBusiness.PARAMETER_MODE, ForumBusiness.PARAMETER_CLOSE));
+		addSubmitButton(new SubmitButton(this._iwrb.getLocalizedString(ForumBusiness.PARAMETER_SAVE, "Save"), ForumBusiness.PARAMETER_MODE, ForumBusiness.PARAMETER_SAVE));
 	}
 
 	private void delete() {
@@ -202,7 +208,7 @@ public class ForumThreadEditor extends IWAdminWindow {
 		String body = iwc.getParameter(ForumBusiness.PARAMETER_THREAD_BODY);
 		String name = iwc.getParameter(ForumBusiness.PARAMETER_USER_NAME);
 		String email = iwc.getParameter(ForumBusiness.PARAMETER_USER_EMAIL);
-		
+
 		if(headline == null || "".equals(headline)) {
 			this.someErrorMessage = this._iwrb.getLocalizedString("cannot_save", "Cannot save");
 			this.errorDetail = this._iwrb.getLocalizedString("headline_is_empty", "Threads headline is empty");
@@ -213,7 +219,7 @@ public class ForumThreadEditor extends IWAdminWindow {
 			this.forumBusiness.saveThread(this._topicID, this._threadID, this._parentThreadID, this._userID, name, email, headline, body);
 			setParentToReload();
 			close();
-			
+
 		}
 	}
 
@@ -226,6 +232,7 @@ public class ForumThreadEditor extends IWAdminWindow {
 		close();
 	}
 
+	@Override
 	public String getBundleIdentifier() {
 		return IW_BUNDLE_IDENTIFIER;
 	}
